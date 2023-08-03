@@ -1,2 +1,3 @@
 # paptrace
-Trace library
+
+Platform-agnostic performance trace library.
