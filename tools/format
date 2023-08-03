@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function main {
+  local script_dir
+  script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+  local repo_dir="${script_dir}/.."
+
+  cd "${repo_dir}" || return 1
+  echo "Running clang-format ..."
+  local dirs=(
+    "include"
+    "src"
+  )
+  for dir in "${dirs[@]}"; do
+    find "${dir}" \( -iname '*.h' -o -iname '*.cpp' \) -exec echo {} \; \
+      -exec clang-format -i {} \;
+  done
+}
+
+main "$@"
