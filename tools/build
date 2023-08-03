@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function main {
+  local script_dir
+  script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+  local repo_dir="${script_dir}/.."
+
+  cd "${repo_dir}" || return 1
+  if [[ ! -f build/CMakeCache.txt ]]; then
+    if ! cmake -S . -B build --install-prefix="${repo_dir}/install"; then
+      return 1
+    fi
+  fi
+  cmake --build build -j 8 && cmake --install build
+}
+
+main "$@"
