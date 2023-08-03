@@ -1,7 +1,7 @@
 # Copyright (c) 2023-present, Ian Dinwoodie.
 # Distributed under the MIT License (http://opensource.org/licenses/MIT).
 
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.24)
 
 ################################################################################
 # CMake policies.
