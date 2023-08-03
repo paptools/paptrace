@@ -43,6 +43,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 ################################################################################
 # Third party libraries.
 
+if (PAPTRACE_INSTALL)
+  # Declared here for use by fetched dependencies.
+  set(install_targets "")
+endif ()
+
 include("cmake/FindGoogleTest.cmake")
 include("cmake/FindJson.cmake")
 
@@ -81,7 +86,7 @@ target_link_libraries(paptrace
 
 if (PAPTRACE_INSTALL)
   set(targets_export_name "${PROJECT_NAME}-targets")
-  set(install_targets paptrace nlohmann_json gtest)
+  list(APPEND install_targets paptrace nlohmann_json)
   install(TARGETS ${install_targets}
     EXPORT "${targets_export_name}"
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
