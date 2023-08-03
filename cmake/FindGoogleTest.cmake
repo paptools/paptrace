@@ -19,7 +19,7 @@ if (NOT GTest_FOUND)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
   FetchContent_MakeAvailable(GTest)
   if (NOT DEFINED GTest_VERSION)
-    set(GTest_VERSION ${gtest_version})
+    set(GTest_VERSION ${gtest_version} CACHE INTERNAL "")
   endif ()
 
   if (PAPTRACE_INSTALL)
