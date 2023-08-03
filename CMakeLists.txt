@@ -58,6 +58,8 @@ add_library(paptrace STATIC
   "src/paptrace.cpp"
 )
 
+add_library(${PROJECT_NAME}::paptrace ALIAS paptrace)
+
 target_include_directories(paptrace
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
