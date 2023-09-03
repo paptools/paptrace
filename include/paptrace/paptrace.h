@@ -14,6 +14,8 @@
 #include <string>
 
 namespace paptrace {
+using NodeID = unsigned int;
+
 struct Param {
   const std::string name;
   const std::string value;
@@ -34,11 +36,11 @@ public:
 
 namespace NodeFactory {
 std::unique_ptr<Node>
-CreateCallNode(int id, const std::string &type, const std::string &sig,
+CreateCallNode(NodeID id, const std::string &type, const std::string &sig,
                const std::initializer_list<Param> &params);
-std::unique_ptr<Node> CreateCallNode(int id, const std::string &type,
+std::unique_ptr<Node> CreateCallNode(NodeID id, const std::string &type,
                                      const std::string &sig);
-std::unique_ptr<Node> CreateStmtNode(int id, const std::string &type,
+std::unique_ptr<Node> CreateStmtNode(NodeID id, const std::string &type,
                                      const std::string &desc);
 } // namespace NodeFactory
 } // namespace paptrace

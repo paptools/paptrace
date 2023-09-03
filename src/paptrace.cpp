@@ -61,7 +61,7 @@ SessionNode s_session_node;
 
 class CallNode : public Node {
 public:
-  CallNode(int id, const std::string &type, const std::string &sig,
+  CallNode(NodeID id, const std::string &type, const std::string &sig,
            const std::initializer_list<Param> &params)
       : id_(id), type_(type), sig_(sig), params_(params), children_() {
     Register();
@@ -96,7 +96,7 @@ public:
   }
 
 private:
-  int id_;
+  NodeID id_;
   const std::string type_;
   const std::string sig_;
   std::list<Param> params_;
@@ -114,7 +114,7 @@ private:
 
 class StmtNode : public Node {
 public:
-  StmtNode(int id, const std::string &type, const std::string &desc)
+  StmtNode(NodeID id, const std::string &type, const std::string &desc)
       : id_(id), type_(type), desc_(desc), children_() {
     Register();
   }
@@ -143,7 +143,7 @@ public:
   }
 
 private:
-  int id_;
+  NodeID id_;
   const std::string type_;
   const std::string desc_;
   std::list<nlohmann::json> children_;
@@ -171,18 +171,18 @@ nlohmann::json Param::Serialize() const {
 
 namespace NodeFactory {
 std::unique_ptr<Node>
-CreateCallNode(int id, const std::string &type, const std::string &sig,
+CreateCallNode(NodeID id, const std::string &type, const std::string &sig,
                const std::initializer_list<Param> &params) {
   return std::make_unique<CallNode>(id, type, sig, params);
 }
 
-std::unique_ptr<Node> CreateCallNode(int id, const std::string &type,
+std::unique_ptr<Node> CreateCallNode(NodeID id, const std::string &type,
                                      const std::string &sig) {
   const auto &empty = std::initializer_list<Param>();
   return std::make_unique<CallNode>(id, type, sig, empty);
 }
 
-std::unique_ptr<Node> CreateStmtNode(int id, const std::string &type,
+std::unique_ptr<Node> CreateStmtNode(NodeID id, const std::string &type,
                                      const std::string &desc) {
   return std::make_unique<StmtNode>(id, type, desc);
 }
